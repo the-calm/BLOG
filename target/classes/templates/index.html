@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/setting.css" th:href="@{/css/setting.css}">
+</head>
+<body>
+
+<nav th:replace="_fragments :: menu(1)" class="ui teal inverted attached segment s-padding-td-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui header item">Blog</h2>
+            <a href="#" class="setting item s-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="setting item s-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="setting item s-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="setting item s-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="setting item s-mobile-hide"><i class="info icon"></i>关于我</a>
+            <div class="right setting item s-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search  link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle icon black inverted button s-top-right s-web-hide">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<div class="s-padding-td-biggest">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <!---left list--->
+            <div class="eleven wide column">
+                <!---header--->
+                <div class="ui top attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <div class="ui teal header">博客</div>
+                        </div>
+                        <div class="right aligned column">
+                            共 <h3 class="ui orange header s-inline-block s-text-thin" th:text="${page.totalElements}">14</h3> 篇
+                        </div>
+                    </div>
+                </div>
+
+                <!---content--->
+                <div class="ui attached segment">
+
+                    <div class="ui padded vertical segment s-padding-td-biggest" th:each="blog : ${page.content}">
+                        <div class="ui middle aligned mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="s-black" th:text="${blog.title}">选择与放弃</a></h3>
+                                <p class="s-text" th:text="|${blog.description}......|">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" th:src="@{${blog.user.avatar}}" alt="" class="ui avatar image">
+                                                <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-02-07</span>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i><span th:text="${blog.views}">234</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin" th:text="${blog.type.name}">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" th:src="@{${blog.firstPic}}" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--/*-->
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="ui padded vertical segment s-padding-td-biggest">
+                        <div class="ui mobile reversed stackable grid">
+
+                            <div class="eleven wide column">
+                                <h3 class="ui header">选择与放弃</h3>
+                                <p class="s-text">
+                                    选择与放弃，是生活与人生处处需要面对的关口。昨天的放弃决定今天的选择，明天的生活取决于今天的选择。人生如演戏，每个人都是自己的导演。只有学会选择和懂得放弃的人，才能赢得精彩的生活。</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+
+                                            <div class="item">
+                                                <img src="https://picsum.photos/id/1005/100/100" alt=""
+                                                     class="ui avatar image">
+                                                <div class="content"><a href="#" class="header">谢坤</a></div>
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="calendar icon"></i> 2020-02-07
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="eye icon"></i> 234
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank"
+                                           class="ui teal basic label s-padding-mini s-text-thin">励志语录</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img src="https://picsum.photos/id/1005/800/450" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--*/-->
+                </div>
+
+                <!---bottom--->
+                <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui teal basic mini button">上一页</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui teal basic mini button">下一页</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!---right list--->
+            <div class="five wide column">
+                <!---classified--->
+                <div class="ui segments">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="idea icon"></i> 分类
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" th:href="@{types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui teal segment">
+                        <div class="ui fluid vertical menu">
+                            <a href="#" th:href="@{/types/{id}(id=${type.id})}" target="_blank" class="item" th:each="type : ${types}">
+                                <span th:text="${type.name}">励志语录</span>
+                                <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">13</div>
+                            </a>
+                            <!--/*-->
+                            <a href="#" class="item">
+                                励志语录
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                励志语录
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                励志语录
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                励志语录
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a href="#" class="item">
+                                励志语录
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <!--*/-->
+                        </div>
+                    </div>
+                </div>
+
+                <!---labels--->
+                <div class="ui segments s-margin-top-big">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="tags icon"></i> 标签
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" th:href="@{tags/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui teal segment" >
+                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny" th:each="tag : ${tags}">
+                            <span th:text="${tag.name}">方法论</span>
+                            <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
+                        </a>
+
+                        <!--/*-->
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a href="#" target="_blank" class="ui teal basic left pointing label s-margin-td-tiny">
+                            方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <!--*/-->
+                    </div>
+                </div>
+
+                <!---recommended--->
+                <div class="ui segments s-margin-top-big">
+                    <div class="ui secondary segment">
+                        <i class="bookmark icon"></i> 最新推荐
+                    </div>
+                    <div class="ui segment" th:each="blog : ${recommendBlogs}">
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="s-black s-text-thin" th:text="${blog.title}">用户故事 （User Story）</a>
+                    </div>
+                    <!--/*-->
+                    <div class="ui segment">
+                        <a href="#" target="_blank" class="s-black s-text-thin">用户故事 （User Story）</a>
+                    </div>
+                    <div class="ui segment">
+                        <a href="#" target="_blank" class="s-black s-text-thin">用户故事 （User Story）</a>
+                    </div>
+                    <!--*/-->
+                </div>
+
+                <!---QR code--->
+                <h4 class="ui horizontal divider header s-margin-top-big">扫码关注我</h4>
+                <div class="ui centered card" style="width: 15em">
+                    <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" alt="" class="ui rounded image">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<footer th:replace="_fragments :: footer" class="ui teal inverted vertical segment s-padding-td-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="=ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="four wide column">
+                <h4 class="ui inverted header s-text-thin s-text-space">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事（User Story)</a>
+                    <a href="#" class="item">用户故事（User Story)</a>
+                    <a href="#" class="item">用户故事（User Story)</a>
+                </div>
+            </div>
+
+            <div class="four wide column">
+                <h4 class="ui inverted header s-text-thin s-text-space">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">QQ：1821599698</a>
+                    <a href="#" class="item">微信：xk18798865604</a>
+                </div>
+            </div>
+
+            <div class="five wide column">
+                <h4 class="ui inverted header s-text-thin s-text-space">谢坤</h4>
+                <p class="s-text-thin s-text-space s-opacity-mini">这是我的个人博客，我在这里会分享一些我的个人经历，感悟，思考，以及问题，希望也能对你有所帮助...</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="s-text-thin s-text-space s-opacity-big">Copyright @2019-2020 Blog Designed by Xiekun</p>
+    </div>
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.setting').toggleClass('s-mobile-hide');
+    })
+
+
+
+</script>
+</body>
+</html>
